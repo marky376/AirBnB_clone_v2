@@ -19,7 +19,7 @@ class BaseModel(Base):
         super().__init__(*args, **kwargs)
 
     def save(self):
-        """save storage """"
+        """save storage """
         models.storage.new(self)
         models.storage.save()
 
