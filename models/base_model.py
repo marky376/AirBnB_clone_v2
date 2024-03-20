@@ -1,4 +1,3 @@
-cat << 'EOF' > base_model.py
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
 from sqlalchemy import Column, String, DateTime
@@ -10,7 +9,7 @@ Base = declarative_base()
 
 class BaseModel(Base):
     """Create Base = declarative_base() before the class definition of BaseModel"""
-    __tablename__ = 'base_models'
+    __tablename__ = base_models
     id = Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime(timezone=True), default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), default=func.now(), nullable=False)
@@ -20,18 +19,16 @@ class BaseModel(Base):
         super().__init__(*args, **kwargs)
 
     def save(self):
-        """save storage """
+        """save storage """"
         models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
         """ to dictionary """
         dict_obj = self.__dict__.copy()
-        dict_obj.pop('_sa_instance_state', None)
+        dict_obj.pop(_sa_instance_state, None)
         return dict_obj
 
     def delete(self):
         """ delete a storage """
         models.storage.delete(self)
-EOF
-
